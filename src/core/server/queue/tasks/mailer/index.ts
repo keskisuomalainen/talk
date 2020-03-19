@@ -4,7 +4,7 @@ import now from "performance-now";
 import logger from "coral-server/logger";
 import Task from "coral-server/queue/Task";
 import MailerContent from "coral-server/queue/tasks/mailer/content";
-import TenantCache from "coral-server/services/tenant/cache";
+import { TenantCache } from "coral-server/services/tenant/cache";
 
 import {
   createJobProcessor,

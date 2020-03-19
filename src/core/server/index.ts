@@ -35,7 +35,7 @@ import {
   createAugmentedRedisClient,
   createRedisClient,
 } from "coral-server/services/redis";
-import TenantCache from "coral-server/services/tenant/cache";
+import { TenantCache } from "coral-server/services/tenant/cache";
 
 import {
   NotifierCoralEventListener,

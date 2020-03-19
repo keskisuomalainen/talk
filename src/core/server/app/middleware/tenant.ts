@@ -2,7 +2,7 @@ import uuid from "uuid/v1";
 
 import { TenantNotFoundError } from "coral-server/errors";
 import logger from "coral-server/logger";
-import TenantCache from "coral-server/services/tenant/cache";
+import { TenantCache } from "coral-server/services/tenant/cache";
 import { RequestHandler } from "coral-server/types/express";
 
 export interface MiddlewareOptions {

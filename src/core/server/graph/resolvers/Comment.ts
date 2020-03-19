@@ -9,6 +9,7 @@ import {
 } from "coral-server/models/action/comment";
 import * as comment from "coral-server/models/comment";
 import {
+  getDepth,
   getLatestRevision,
   hasAncestors,
   hasPublishedStatus,
@@ -96,8 +97,8 @@ export const Comment: GQLCommentTypeResolver<comment.Comment> = {
     }),
   viewerActionPresence: (c, input, ctx) =>
     ctx.user ? ctx.loaders.Comments.retrieveMyActionPresence.load(c.id) : null,
-  parentCount: c => (hasAncestors(c) ? c.ancestorIDs.length : 0),
-  depth: c => (hasAncestors(c) ? c.ancestorIDs.length : 0),
+  parentCount: c => getDepth(c),
+  depth: c => getDepth(c),
   rootParent: (c, input, ctx, info) =>
     hasAncestors(c)
       ? maybeLoadOnlyID(ctx, info, c.ancestorIDs[c.ancestorIDs.length - 1])

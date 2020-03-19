@@ -196,7 +196,7 @@ export function getRelevantSSOKeys(
   kid?: string
 ): Secret[] {
   // Collect all the current valid keys.
-  const keys = integration.keys.filter(k => {
+  const keys = integration.signingSecrets.filter(k => {
     if (k.inactiveAt && now >= k.inactiveAt) {
       return false;
     }
@@ -261,12 +261,6 @@ export class SSOVerifier implements Verifier<SSOToken> {
     const integration = tenant.auth.integrations.sso;
     if (!integration.enabled) {
       throw new IntegrationDisabled("sso");
-    }
-
-    // check to see if there is at least one key associated with this
-    // integration.
-    if (integration.keys.length === 0) {
-      throw new Error("integration key does not exist");
     }
 
     // Get the valid configurations for the given token and integration pair.
