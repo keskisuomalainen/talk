@@ -10,7 +10,7 @@ import { DeepPartial, Omit, Sub } from "coral-common/types";
 import { isBeforeDate } from "coral-common/utils";
 import { dotize } from "coral-common/utils/dotize";
 import {
-  generateSecret,
+  generateSigningSecret,
   Settings,
   SigningSecretResource,
 } from "coral-server/models/settings";
@@ -193,7 +193,7 @@ export async function createTenant(
             stream: true,
           },
           // TODO: [CORL-754] (wyattjoh) remove this in favor of generating this when needed
-          signingSecrets: [generateSecret("ssosec", now)],
+          signingSecrets: [generateSigningSecret("ssosec", now)],
         },
         oidc: {
           enabled: false,
@@ -395,24 +395,6 @@ export async function disableTenantFeatureFlag(
       // Pull the flag from the set of enabled flags.
       $pull: {
         featureFlags: flag,
-      },
-    },
-    {
-      // False to return the updated document instead of the original
-      // document.
-      returnOriginal: false,
-    }
-  );
-
-  return result.value || null;
-}
-export async function deleteTenantSSOKey(mongo: Db, id: string, kid: string) {
-  // Update the tenant.
-  const result = await collection(mongo).findOneAndUpdate(
-    { id },
-    {
-      $pull: {
-        "auth.integrations.sso.keys": { kid },
       },
     },
     {

@@ -5,9 +5,9 @@ import getNow from "performance-now";
 import { Config } from "coral-server/config";
 import { CoralEventPayload } from "coral-server/events/event";
 import logger from "coral-server/logger";
-import { filterExpiredSecrets } from "coral-server/models/settings";
+import { filterExpiredSigningSecrets } from "coral-server/models/settings";
 import {
-  deleteEndpointSecrets,
+  deleteTenantWebhookEndpointSigningSecrets,
   getWebhookEndpoint,
 } from "coral-server/models/tenant";
 import { JobProcessor } from "coral-server/queue/Task";
@@ -223,20 +223,19 @@ export function createJobProcessor({
           tenant,
           endpointID
         );
-      } else {
-        // TODO: (wyattjoh) maybe schedule a retry?
       }
+      // TODO: (wyattjoh) maybe schedule a retry?
     }
 
     // Remove the expired secrets in the next tick so that it does not affect
     // the sending performance of this job, and errors do not impact the
     // sending.
     const expiredSigningSecrets = endpoint.signingSecrets.filter(
-      filterExpiredSecrets(now)
+      filterExpiredSigningSecrets(now)
     );
     if (expiredSigningSecrets.length > 0) {
       process.nextTick(() => {
-        deleteEndpointSecrets(
+        deleteTenantWebhookEndpointSigningSecrets(
           mongo,
           tenantID,
           endpoint.id,
