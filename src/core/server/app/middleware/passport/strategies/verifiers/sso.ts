@@ -10,7 +10,7 @@ import logger from "coral-server/logger";
 import { Secret, SSOAuthIntegration } from "coral-server/models/settings";
 import {
   Tenant,
-  updateLastUsedAtTenantSSOKey,
+  updateLastUsedAtTenantSSOSigningSecret,
 } from "coral-server/models/tenant";
 import {
   retrieveUserWithProfile,
@@ -171,7 +171,7 @@ export async function findOrCreateSSOUser(
 const updateLastUsedAtKID = throttle(
   async (redis: Redis, tenantID: string, kid: string, now: Date) => {
     try {
-      await updateLastUsedAtTenantSSOKey(redis, tenantID, kid, now);
+      await updateLastUsedAtTenantSSOSigningSecret(redis, tenantID, kid, now);
       logger.trace({ tenantID, kid }, "updated last used tenant sso key");
     } catch (err) {
       logger.error(
