@@ -74,18 +74,23 @@ const Profile: FunctionComponent<ProfileProps> = props => {
     <HorizontalGutter size="double">
       <UserBoxContainer viewer={props.viewer} settings={props.settings} />
       <TabBar
-        variant="secondary"
+        variant="streamSecondary"
         activeTab={local.profileTab}
         onTabClick={onTabClick}
         className={CLASSES.tabBarMyProfile.$root}
       >
-        <Tab tabID="MY_COMMENTS" className={CLASSES.tabBarMyProfile.myComments}>
+        <Tab
+          tabID="MY_COMMENTS"
+          variant="streamSecondary"
+          className={CLASSES.tabBarMyProfile.myComments}
+        >
           <Localized id="profile-myCommentsTab-comments">
             <span>My comments</span>
           </Localized>
         </Tab>
         <Tab
           tabID="PREFERENCES"
+          variant="streamSecondary"
           className={CLASSES.tabBarMyProfile.preferences}
         >
           <Localized id="profile-preferencesTab">
@@ -93,7 +98,11 @@ const Profile: FunctionComponent<ProfileProps> = props => {
           </Localized>
         </Tab>
         {showAccountTab && (
-          <Tab tabID="ACCOUNT" className={CLASSES.tabBarMyProfile.settings}>
+          <Tab
+            tabID="ACCOUNT"
+            variant="streamSecondary"
+            className={CLASSES.tabBarMyProfile.settings}
+          >
             <Localized id="profile-accountTab">
               <span>Account</span>
             </Localized>
