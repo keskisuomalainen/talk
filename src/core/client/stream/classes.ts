@@ -797,6 +797,7 @@ const CLASSES = {
     requestButton: "coral coral-downloadCommentHistory-requestButton",
     recentRequest: "coral coral-downloadCommentHistory-recentRequest",
     requestLater: "coral coral-downloadCommentHistory-requestLater",
+    requestError: "coral coral-downloadCommentHistory-requestError",
   },
 
   /**
