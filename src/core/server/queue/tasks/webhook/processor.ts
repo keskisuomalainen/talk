@@ -48,35 +48,6 @@ export interface WebhookDelivery {
   createdAt: Date;
 }
 
-/**
- * generateSignature will generate a signature used to assist clients to
- * validate that the request came from Coral.
- *
- * @param secret the secret used to sign the body with
- * @param body the body to use when signing
- */
-export function generateSignature(secret: string, body: string) {
-  return crypto
-    .createHmac("sha256", secret)
-    .update(body)
-    .digest()
-    .toString("hex");
-}
-
-export function generateSignatures(
-  endpoint: Pick<Endpoint, "signingSecrets">,
-  body: string,
-  now: Date
-) {
-  // For each of the signatures, we only want to sign the body with secrets that
-  // are still active.
-  return endpoint.signingSecrets
-    .filter(filterActiveSecrets(now))
-    .map(({ secret }) => generateSignature(secret, body))
-    .map(signature => `sha256=${signature}`)
-    .join(",");
-}
-
 interface CoralWebhookEventPayload extends CoralEventPayload {
   /**
    * tenantID is the ID of the Tenant that this event originated at.
