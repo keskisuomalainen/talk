@@ -1,3 +1,4 @@
+import { getExternalModerationPhase } from "coral-server/models/settings";
 import { getWebhookEndpoint } from "coral-server/models/tenant";
 
 import { GQLQueryTypeResolver } from "coral-server/graph/schema/__generated__/types";
@@ -28,4 +29,8 @@ export const Query: Required<GQLQueryTypeResolver<void>> = {
   sites: (source, args, ctx) => ctx.loaders.Sites.connection(args),
   site: (source, { id }, ctx) => (id ? ctx.loaders.Sites.site.load(id) : null),
   webhookEndpoint: (source, { id }, ctx) => getWebhookEndpoint(ctx.tenant, id),
+  externalModerationPhase: (source, { id }, ctx) =>
+    ctx.tenant.integrations.custom
+      ? getExternalModerationPhase(ctx.tenant.integrations.custom, id)
+      : null,
 };
