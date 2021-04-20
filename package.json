@@ -385,7 +385,7 @@
     "simplemde": "^1.11.2",
     "simulant": "^0.2.2",
     "sinon": "^9.0.1",
-    "sockjs-client": "^1.4.0",
+    "sockjs-client": "^1.5.1",
     "stack-trace": "^0.0.10",
     "strip-ansi": "^6.0.0",
     "style-loader": "^1.1.3",
