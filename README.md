@@ -2,6 +2,7 @@
   <a href="https://coralproject.net" target="_blank"><img width="250" src="https://docs.coralproject.net/img/coralproject_by_voxmedia.svg" alt="Coral by Vox Media" /></a>
 </p>
 
+
 <p align="center">
   A better commenting experience from <a href="https://product.voxmedia.com/" target="_blank">Vox Media</a>.
 </p>
@@ -26,7 +27,7 @@ around your work.
 If you're new to Coral, the [Coral documentation](https://docs.coralproject.net/)
 is a great place to start running and developing with Coral.
 
-You’ve installed Coral, and you’re preparing to launch it on your site. The real
+You???ve installed Coral, and you???re preparing to launch it on your site. The real
 community work starts now, before you go live. You have a unique opportunity
 pre-launch to set your community up for success. Read our
 [Community Guides](https://guides.coralproject.net/start-here/) to learn more.
